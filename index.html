@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salah Eddine Tahiri — Finance × Quantitative Methods</title>
+  <meta name="description" content="Finance student at ENCG Agadir. Portfolio management, financial markets, and quantitative methods. Education, experience, and skills at a glance." />
+  <meta name="theme-color" content="#101010" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       EDIT ME: all colors live here.
+       ============================================================ */
+    :root {
+      --bg: #101010;
+      --surface: #161616;
+      --line: #262626;
+      --ink: #f2f2ef;
+      --soft: #9a9a94;
+      --accent: #3ecf8e;
+      --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
+      --sans: "Inter", "Segoe UI", -apple-system, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    ::selection { background: var(--accent); color: #101010; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ---- mono micro-labels ---- */
+    .mono {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .section-label .num { color: var(--accent); }
+    .section-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    section { padding: 96px 0; border-top: 1px solid var(--line); }
+
+    .headline {
+      font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 48px;
+    }
+    .headline .dim { color: var(--soft); }
+
+    /* ============================================================
+       NAV
+       ============================================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: rgba(16, 16, 16, 0.82);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .logo { font-weight: 700; font-size: 0.95rem; letter-spacing: -0.01em; }
+    .logo span { color: var(--accent); }
+
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: 0.82rem;
+      color: var(--soft);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      border-top: none;
+      padding: 180px 0 110px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* dotted world map backdrop (green dot = Agadir) */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("map.svg") no-repeat 115% 38% / 70% auto;
+      opacity: 0.55;
+      mask-image: linear-gradient(100deg, transparent 32%, black 62%);
+      -webkit-mask-image: linear-gradient(100deg, transparent 32%, black 62%);
+      pointer-events: none;
+    }
+
+    .hero .container { position: relative; }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow .tick {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 4.6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.04;
+    }
+    .hero h1 .dim { color: var(--soft); }
+
+    .hero-sub {
+      margin-top: 28px;
+      max-width: 540px;
+      color: var(--soft);
+      font-size: 1.05rem;
+    }
+    .hero-sub strong { color: var(--ink); font-weight: 600; }
+
+    .hero-actions {
+      margin-top: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+    .btn-solid { background: var(--ink); color: #101010; }
+    .btn-solid:hover { background: var(--accent); }
+    .btn-ghost { border: 1px solid var(--line); color: var(--ink); }
+    .btn-ghost:hover { border-color: var(--ink); }
+
+    .hero-meta {
+      margin-top: 72px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ---- avatar ---- */
+    .hero-grid {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 48px;
+    }
+
+    .avatar-wrap { flex-shrink: 0; text-align: center; }
+
+    .avatar {
+      width: 168px;
+      height: 168px;
+      border-radius: 50%;
+      background: var(--surface);
+      outline: 2px dotted var(--accent);
+      outline-offset: 7px;
+      object-fit: cover;
+      filter: grayscale(1) contrast(1.04);
+    }
+
+    .avatar-wrap .mono { display: block; margin-top: 14px; }
+
+    /* ============================================================
+       EDUCATION
+       ============================================================ */
+    .edu-row {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 32px;
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+    }
+    .edu-row:last-child { border-bottom: 1px solid var(--line); }
+
+    .edu-row h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+    .edu-row .degree { color: var(--ink); font-weight: 600; margin-bottom: 10px; }
+    .edu-row p { color: var(--soft); font-size: 0.94rem; }
+    .edu-row .meta-line { margin-top: 6px; }
+    .edu-row .meta-line strong { color: var(--ink); font-weight: 600; }
+
+    /* ============================================================
+       EXPERIENCE
+       ============================================================ */
+    .xp-row {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 32px;
+      padding: 40px 0;
+      border-top: 1px solid var(--line);
+    }
+    .xp-row:last-child { border-bottom: 1px solid var(--line); }
+
+    .xp-left h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+    .xp-left .mono { display: block; margin-top: 8px; }
+
+    .tag-current {
+      display: inline-block;
+      margin-top: 12px;
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(62, 207, 142, 0.35);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .xp-right .role { font-weight: 650; font-size: 1rem; }
+    .xp-right .org { color: var(--soft); font-size: 0.9rem; margin-top: 2px; }
+
+    .xp-right ul {
+      margin-top: 16px;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .xp-right li {
+      color: var(--soft);
+      font-size: 0.94rem;
+      padding-left: 20px;
+      position: relative;
+    }
+    .xp-right li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ============================================================
+       SKILLS
+       ============================================================ */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .skill-col { background: var(--bg); padding: 32px 28px; }
+
+    .skill-col .mono { display: block; margin-bottom: 8px; color: var(--accent); }
+    .skill-col h3 { font-size: 1.02rem; font-weight: 700; margin-bottom: 20px; }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 13px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .pill:hover { color: var(--ink); border-color: var(--soft); }
+
+    /* ============================================================
+       CTA
+       ============================================================ */
+    .cta { text-align: left; }
+    .cta .headline { margin-bottom: 24px; }
+    .cta-mail {
+      font-family: var(--mono);
+      font-size: clamp(1rem, 2.6vw, 1.4rem);
+      color: var(--accent);
+      border-bottom: 1px solid rgba(62, 207, 142, 0.35);
+      padding-bottom: 2px;
+      transition: border-color 0.15s;
+    }
+    .cta-mail:hover { border-color: var(--accent); }
+    .cta .hero-actions { margin-top: 36px; }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 36px 0 44px;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--soft);
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--ink); }
+
+    /* ============================================================
+       MOBILE
+       ============================================================ */
+    @media (max-width: 760px) {
+      section { padding: 64px 0; }
+      .nav-links { display: none; }
+      .hero { padding: 130px 0 72px; }
+      .hero-grid { flex-direction: column-reverse; gap: 36px; }
+      .avatar { width: 128px; height: 128px; }
+      .hero::before {
+        background-position: center 20%;
+        background-size: 160% auto;
+        opacity: 0.3;
+        mask-image: linear-gradient(to bottom, black 55%, transparent);
+        -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent);
+      }
+      .edu-row, .xp-row { grid-template-columns: 1fr; gap: 14px; padding: 28px 0; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .hero-meta { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= NAV ================= -->
+  <nav>
+    <div class="container nav-inner">
+      <a class="logo" href="#top">st<span>.</span> &nbsp;Salah Eddine Tahiri</a>
+      <div class="nav-links">
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="nav-cta" href="resume.pdf" download>Download CV</a>
+    </div>
+  </nav>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero" id="top">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-eyebrow">
+            <span class="tick"></span>
+            <span class="mono">Finance &times; Quantitative Methods &mdash; Internship Candidate</span>
+          </div>
+
+          <h1>Rigorous analysis.<br /><span class="dim">Real-world impact.</span></h1>
+
+          <p class="hero-sub">
+            Hi, I'm <strong>Salah Eddine Tahiri</strong> — a final-year Finance student at
+            <strong>ENCG Agadir</strong> (national competitive admission). I combine a solid
+            quantitative foundation with applied skills in portfolio management, data science,
+            and public finance. Trilingual: Arabic, French, English.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-solid" href="resume.pdf" download>&#8595; Download Resume</a>
+            <a class="btn btn-ghost" href="mailto:salaheddine.tahiri.23@edu.uiz.ac.ma">Email</a>
+            <a class="btn btn-ghost" href="https://linkedin.com/in/salaheddinetahiri" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn-ghost" href="tel:+212701065058">+212 701 065 058</a>
+          </div>
+        </div>
+
+        <div class="avatar-wrap">
+          <img class="avatar" src="photo.png" alt="Salah Eddine Tahiri" />
+          <span class="mono">Agadir, Morocco</span>
+        </div>
+      </div>
+
+      <div class="hero-meta">
+        <span class="mono">Master in Management &middot; Finance &middot; ENCG Agadir</span>
+        <span class="mono">Trilingual &middot; AR / FR / EN</span>
+        <span class="mono">Open to finance &amp; consulting internships</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= EDUCATION ================= -->
+  <section id="education">
+    <div class="container">
+      <div class="section-label">
+        <span class="mono"><span class="num">01 /</span> Education</span>
+      </div>
+      <h2 class="headline">Foundations.<br /><span class="dim">Built to last.</span></h2>
+
+      <div class="edu-row">
+        <div>
+          <h3>ENCG Agadir — Université Ibn Zohr</h3>
+          <span class="mono">Sep 2024 — Present</span>
+        </div>
+        <div>
+          <p class="degree">Master in Management — Finance Specialization</p>
+          <p class="meta-line"><strong>Focus:</strong> Quantitative finance, portfolio management, financial instruments &amp; derivatives</p>
+          <p class="meta-line"><strong>Applied data science:</strong> Python, SQL, and financial modeling for financial analysis</p>
+        </div>
+      </div>
+
+      <div class="edu-row">
+        <div>
+          <h3>CPGE Reda Slaoui</h3>
+          <span class="mono">Sep 2022 — Jun 2024</span>
+        </div>
+        <div>
+          <p class="degree">Classes Préparatoires aux Grandes Écoles — ECS Track</p>
+          <p class="meta-line">Intensive, highly selective program preparing for Morocco's top business schools, combining excellence in mathematics with rigor in economics and geopolitics.</p>
+          <p class="meta-line"><strong>Distinction:</strong> Highest grade of the cohort in Advanced Mathematics and in Geopolitics</p>
+        </div>
+      </div>
+
+      <div class="edu-row">
+        <div>
+          <h3>Lycée Ibn Soulaymane Errasmouki</h3>
+          <span class="mono">Jun 2022</span>
+        </div>
+        <div>
+          <p class="degree">Baccalauréat in Mathematical Sciences, Option B — Tiznit, Morocco</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label">
+        <span class="mono"><span class="num">02 /</span> Experience &amp; Leadership</span>
+      </div>
+      <h2 class="headline">Learning<br /><span class="dim">by doing.</span></h2>
+
+      <div class="xp-row">
+        <div class="xp-left">
+          <h3>Moubina Immobilier S.A.R.L</h3>
+          <span class="mono">May — Jun 2026</span>
+        </div>
+        <div class="xp-right">
+          <p class="role">Finance Department Intern (PFA)</p>
+          <p class="org">Agadir, Morocco</p>
+          <ul>
+            <li>Worked directly with the Head of Finance, with cross-functional responsibilities covering financial reporting, budget monitoring, and risk management on active real-estate projects.</li>
+            <li>Conducted a sensitivity analysis and TEI/PAE affordability modeling for the regional real-estate market, translated into a three-tier risk mitigation plan presented to department management.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="xp-row">
+        <div class="xp-left">
+          <h3>Trésorerie Générale du Royaume</h3>
+          <span class="mono">Jul — Aug 2025</span>
+        </div>
+        <div class="xp-right">
+          <p class="role">Public Finance Intern</p>
+          <p class="org">Ministry of Finance — Tiznit, Morocco · Central public-finance institution of Morocco</p>
+          <ul>
+            <li>In-depth analysis of Morocco's public and private banking sector structures and their regulatory frameworks.</li>
+            <li>Direct exposure to financial market mechanisms and sovereign treasury management instruments.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="xp-row">
+        <div class="xp-left">
+          <h3>CPGEISTES S.A.R.L</h3>
+          <span class="mono">Jan 2023 — Present</span>
+          <span class="tag-current">Current role</span>
+        </div>
+        <div class="xp-right">
+          <p class="role">Vice-President &amp; Head of Strategy</p>
+          <p class="org">Morocco · National education platform serving CPGE students</p>
+          <ul>
+            <li>Co-lead strategy and operations for a platform with 35,000+ active users nationwide.</li>
+            <li>Designed and executed the growth strategy across social and educational networks, with direct impact on user engagement.</li>
+            <li>Applied data analysis to identify student needs and optimize content quality and platform retention.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-label">
+        <span class="mono"><span class="num">03 /</span> Skills &amp; Competencies</span>
+      </div>
+      <h2 class="headline">Tools<br /><span class="dim">of the trade.</span></h2>
+
+      <div class="skills-grid">
+        <div class="skill-col">
+          <span class="mono">&#9632; Finance</span>
+          <h3>Hard Skills</h3>
+          <div class="pills">
+            <span class="pill">Financial Modeling</span>
+            <span class="pill">Portfolio Management</span>
+            <span class="pill">Derivatives &amp; Instruments</span>
+            <span class="pill">Risk Analysis</span>
+            <span class="pill">Public Finance</span>
+            <span class="pill">Financial Reporting</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <span class="mono">&#9632; Data</span>
+          <h3>Tools &amp; Software</h3>
+          <div class="pills">
+            <span class="pill">Python</span>
+            <span class="pill">SQL</span>
+            <span class="pill">Excel</span>
+            <span class="pill">Data Science for Finance</span>
+            <span class="pill">Excel</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <span class="mono">&#9632; Credentials</span>
+          <h3>Languages &amp; Certifications</h3>
+          <div class="pills">
+            <span class="pill">Arabic (Native)</span>
+            <span class="pill">French (Fluent)</span>
+            <span class="pill">English (Fluent)</span>
+            <span class="pill">Media Literacy &amp; Fact-Checking — Al-Fanar Media (2025)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="cta" id="contact">
+    <div class="container">
+      <div class="section-label">
+        <span class="mono"><span class="num">04 /</span> Get in touch</span>
+      </div>
+      <h2 class="headline">A good conversation<br /><span class="dim">is a good place to start.</span></h2>
+      <a class="cta-mail" href="mailto:salaheddine.tahiri.23@edu.uiz.ac.ma">salaheddine.tahiri.23@edu.uiz.ac.ma</a>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="resume.pdf" download>&#8595; Download Resume</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/salaheddinetahiri" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="container footer-row">
+      <span class="mono">&copy; 2026 Salah Eddine Tahiri</span>
+      <div class="footer-links">
+        <a href="mailto:salaheddine.tahiri.23@edu.uiz.ac.ma">Email</a>
+        <a href="https://linkedin.com/in/salaheddinetahiri" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#top">Back to top &uarr;</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
